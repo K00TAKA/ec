@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ec</title>
+    <title>EC</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,50 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="/">LOGO</a>
+          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if signed_in? %>
+                <li class="nav-item">
+                  <%= button_to "マイページ", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+                <li class="nav-item">
+                  <%= button_to "商品一覧", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+                <li class="nav-item">
+                  <%= button_to "カート", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+                <li class="nav-item">
+                  <%= button_to "ログアウト", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= button_to "About", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+                <li class="nav-item">
+                  <%= button_to "商品一覧", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+                <li class="nav-item">
+                  <%= button_to "新規登録", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+                <li class="nav-item">
+                  <%= button_to "ログイン", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+  
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
