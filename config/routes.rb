@@ -14,9 +14,12 @@ Rails.application.routes.draw do
     resources :items, :genres, :customers, :orders, :order_details
   end
   
-  namespace :customer do
-    resources :items, :cart_items, :orders, :order_details, :addresses
-  end
+  resources :items
+  resources :cart_items
+  resources :orders
+  resources :order_details
+  resources :addresses
+
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
