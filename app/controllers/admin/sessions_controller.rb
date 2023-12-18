@@ -26,7 +26,7 @@ class Admin::SessionsController < Devise::SessionsController
   # end
   
   def after_sign_in_path_for(resource)
-    # 注文履歴一覧（管理者用へ）
+    get admin_orders_path
   end
 
 end

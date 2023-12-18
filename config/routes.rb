@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :items, :genres, :customers, :orders, :order_details
   end
   
-  namespace :customers do
+  namespace :customer do
     resources :items, :cart_items, :orders, :order_details, :addresses
   end
   

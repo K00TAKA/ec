@@ -20,7 +20,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-              <% if signed_in? %>
+              <% if customers_signed_in? %>
                 <li class="nav-item">
                   <%= button_to "マイページ", { パス or コントローラー名とアクション名 }, method: :get %>
                 </li>
