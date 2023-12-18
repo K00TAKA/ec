@@ -20,7 +20,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-              <% if customers_signed_in? %>
+              <% if customer_signed_in? %>
                 <li class="nav-item">
                   <%= button_to "マイページ", { パス or コントローラー名とアクション名 }, method: :get %>
                 </li>
@@ -29,6 +29,22 @@
                 </li>
                 <li class="nav-item">
                   <%= button_to "カート", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+                <li class="nav-item">
+                  <%= button_to "ログアウト", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+              <% elsif admin_signed_in? %>
+                <li class="nav-item">
+                  <%= button_to "商品一覧", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+                <li class="nav-item">
+                  <%= button_to "会員一覧", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+                <li class="nav-item">
+                  <%= button_to "注文履歴一覧", { パス or コントローラー名とアクション名 }, method: :get %>
+                </li>
+                <li class="nav-item">
+                  <%= button_to "ジャンル一覧", { パス or コントローラー名とアクション名 }, method: :get %>
                 </li>
                 <li class="nav-item">
                   <%= button_to "ログアウト", { パス or コントローラー名とアクション名 }, method: :get %>
