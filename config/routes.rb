@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :items, :genres, :customers, :orders, :order_details
   end
   
+
   root to: 'public/homes#top'
   get "about" => "public/homes#about"
   resources :customers

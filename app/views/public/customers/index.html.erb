@@ -1,0 +1,50 @@
+<h1>マイページ</h1>
+
+<div class="container">
+  <div class="row">
+    <h3>登録情報</h3>
+    <a class="btn btn-primary" href="edit" role="button">編集する</a>
+  </div>
+
+  <table class="table">
+    <tr>
+      <th>氏名</th>
+      <td>
+        <%= @customer.first_name %>
+        <%= @customer.last_name %>
+      </td>
+    </tr>
+    <tr>
+      <th>カナ</th>
+      <td>
+        <%= @customer.first_name_kana %>
+        <%= @customer.last_name_kana %>
+      </td>
+    </tr>
+    <tr>
+      <th>郵便番号</th>
+      <td><%= @customer.postal_code %></td>
+    </tr>
+    <tr>
+      <th>住所</th>
+      <td><%= @customer.address %></td>
+    </tr>
+    <tr>
+      <th>電話番号</th>
+      <td><%= @customer.telephone_number %></td>
+    </tr>
+    <tr>
+      <th>メールアドレス</th>
+      <td><%= @customer.email %></td>
+    </tr>
+  </table>
+  
+  <div class="row">
+    <h3>配送先</h3>
+    <a class="btn btn-primary" href="addresses" role="button">一覧を見る</a>
+  </div>
+  <div class="row">
+    <h3>注文履歴</h3>
+    <a class="btn btn-primary" href="orders" role="button">一覧を見る</a>
+  </div>
+</div>
