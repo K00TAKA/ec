@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table>
+        <tr>
+          <th>ジャンル検索</th>
+        </tr>
+        <% @genres.each do |genre| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to genre.name, public_items_path %>
+            </td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+    
+    <div class="col">
+      <div>
+        <p>
+          ようこそ、ながのCAKEへ！<br>
+          このサイトは、ケーキ販売のECサイトになります。<br>
+          会員でない方も商品の閲覧はできますが、<br>
+          購入には会員登録が必要になります。
+        </p>
+      </div>
+      <div class="row">
+        <h1>新着商品</h1>
+      </div>
+      <!--<新着（登録）順で４つ表示できるといいな>-->
+      <div class="row">
+        <div class="col">
+          <div class="image">
+            <!--<商品画像挿入コード>-->
+          </div>
+          <div class="item_name">
+            <!--<商品名>-->
+          </div>
+          <div class="item_price">
+            <!--<商品価格>-->
+          </div>
+        </div>
+        <div class="col">
+          <div class="image">
+            <!--<商品画像挿入コード>-->
+          </div>
+          <div class="item_name">
+            <!--<商品名>-->
+          </div>
+          <div class="item_price">
+            <!--<商品価格>-->
+          </div>
+        </div>
+        <div class="col">
+          <div class="image">
+            <!--<商品画像挿入コード>-->
+          </div>
+          <div class="item_name">
+            <!--<商品名>-->
+          </div>
+          <div class="item_price">
+            <!--<商品価格>-->
+          </div>
+        </div>
+        <div class="col">
+          <div class="image">
+            <!--<商品画像挿入コード>-->
+          </div>
+          <div class="item_name">
+            <!--<商品名>-->
+          </div>
+          <div class="item_price">
+            <!--<商品価格>-->
+          </div>
+        </div>
+        <div>
+          <%= link_to "全ての商品を見る＞", public_items_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
