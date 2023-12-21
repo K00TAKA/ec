@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>ジャンル一覧・追加</h1>
+  <div class="row">
+    <div class="col">
+      <p>ジャンル名</p>
+    </div>
+    <div class="col">
+      <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
+        <%= f.text.field :name %>
+        <%= f.submit "変更を保存", class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
+</div>
