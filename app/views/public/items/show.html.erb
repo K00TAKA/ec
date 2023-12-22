@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table>
+        <tr>
+          <th>ジャンル検索</th>
+        </tr>
+        <% @genres.each do |genre| %>
+        <tr>
+          <td>
+            <%= link_to genre.name, public_items_path %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+    
+    <div class="col">
+      <%= image_tag @item.get_image(200, 100) %>
+    </div>
+    
+    <div class="col">
+      <!--カートに入れるためのコードはこれでいいのか？-->
+      <%= form_with model: orders do |f| %>
+      <%= item.name %>
+      <%= item.introduction %>
+      <!--< 税込価格表示できるようにする>-->
+      <!--<個数プルダウン選択できようにする>-->
+      <%= f.submit "カートに入れる", class: 'btn btn-success' %>
+    </div>
+    
+  </div>
+</div>
