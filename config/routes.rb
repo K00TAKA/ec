@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :items, :genres, :customers, :orders, :order_details
   end
   
-  namespace :public do
+  scope module: 'public' do
     resources :customers, :items, :cart_items, :orders, :addresses
   end
   
