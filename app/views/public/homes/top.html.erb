@@ -1,20 +1,20 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <table>
-        <tr>
-          <th>ジャンル検索</th>
-        </tr>
-        <% @genres.each do |genre| %>
-        <tbody>
-          <tr>
-            <td>
-              <%= link_to genre.name, public_items_path %>
-            </td>
-          </tr>
-        </tbody>
-        <% end %>
-      </table>
+      <!--<table>-->
+      <!--  <tr>-->
+      <!--    <th>ジャンル検索</th>-->
+      <!--  </tr>-->
+      <!--  < @genres each do |genre| %>-->
+      <!--  <tbody>-->
+      <!--    <tr>-->
+      <!--      <td>-->
+      <!--        <= link_to genre.name, public_items_path %>-->
+      <!--      </td>-->
+      <!--    </tr>-->
+      <!--  </tbody>-->
+      <!--  < end %>-->
+      <!--</table>-->
     </div>
     
     <div class="col">
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div>
-          <%= link_to "全ての商品を見る＞", public_items_path %>
+          <%= link_to "全ての商品を見る", items_path %>
         </div>
       </div>
     </div>

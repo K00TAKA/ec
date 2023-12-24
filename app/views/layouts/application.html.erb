@@ -11,15 +11,15 @@
   </head>
 
   <body class="d-flex flex-column vh-100">
-    <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-light">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-          <a class="navbar-brand" href="/">ながの</a>
+          <a class="navbar-brand" href="/">ながのCAKE</a>
           <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav" style="display: flex; list-style-type: none">
               <% if customer_signed_in? %>
                 <li class="nav-item">
                   <%= button_to "マイページ", customer_path %>
@@ -51,16 +51,16 @@
                 </li>
               <% else %>
                 <li class="nav-item">
-                  <%= button_to "About", root_path, method: :get %>
+                  <%= button_to "About", about_path %>
                 </li>
                 <li class="nav-item">
-                  <%= button_to "商品一覧", items_path, method: :get %>
+                  <%= button_to "商品一覧", items_path %>
                 </li>
                 <li class="nav-item">
-                  <%= button_to "新規登録", new_customer_registration_path, method: :get %>
+                  <%= button_to "新規登録", new_customer_registration_path %>
                 </li>
                 <li class="nav-item">
-                  <%= button_to "ログイン", new_customer_session_path, method: :get %>
+                  <%= button_to "ログイン", new_customer_session_path %>
                 </li>
               <% end %>
             </ul>
@@ -68,7 +68,7 @@
         </div>
       </nav>
     </header>
-  
+    
     <main>
       <%= yield %>
     </main>

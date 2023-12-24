@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :items, :genres, :customers, :orders, :order_details
   end
   
+  # namespaceを使うとURLにpublicが付くためscopeを使用
   scope module: 'public' do
     resources :customers, :items, :cart_items, :orders, :addresses
   end
