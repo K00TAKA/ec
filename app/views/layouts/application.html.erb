@@ -19,48 +19,49 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav" style="display: flex; list-style-type: none">
+            <ul class="navbar-nav ml-auto" >
               <% if customer_signed_in? %>
-                <li class="nav-item">
-                  <%= button_to "マイページ", customer_path %>
+              <!--link_toにすることでmethodがgetになる（button_toだとpostになる）-->
+                <li class="nav-item mr-3">
+                  <%= link_to 'マイページ', customer_path, class: 'btn btn-light' %>
                 </li>
-                <li class="nav-item">
-                  <%= button_to "商品一覧", items_path %>
+                <li class="nav-item mr-3">
+                  <%= link_to "商品一覧", items_path, class: 'btn btn-light' %>
                 </li>
-                <li class="nav-item">
-                  <%= button_to "カート", orders_path %>
+                <li class="nav-item mr-3">
+                  <%= link_to "カート", orders_path, class: 'btn btn-light' %>
                 </li>
-                <li class="nav-item">
-                  <%= button_to "ログアウト", destroy_customer_session_path, method: :delete %>
+                <li class="nav-item mr-3">
+                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'btn btn-light' %>
                 </li>
               <% elsif admin_signed_in? %>
-                <li class="nav-item">
-                  <%= button_to "商品一覧", admin_items_path %>
+                <li class="nav-item mr-3">
+                  <%= link_to "商品一覧", admin_items_path, class: 'btn btn-light' %>
                 </li>
-                <li class="nav-item">
-                  <%= button_to "会員一覧", admin_customers_path %>
+                <li class="nav-item mr-3">
+                  <%= link_to "会員一覧", admin_customers_path, class: 'btn btn-light' %>
                 </li>
-                <li class="nav-item">
-                  <%= button_to "注文履歴一覧", admin_orders_path %>
+                <li class="nav-item mr-3">
+                  <%= link_to "注文履歴一覧", admin_orders_path, class: 'btn btn-light' %>
                 </li>
-                <li class="nav-item">
-                  <%= button_to "ジャンル一覧", admin_genres_path %>
+                <li class="nav-item mr-3">
+                  <%= link_to "ジャンル一覧", admin_genres_path, class: 'btn btn-light' %>
                 </li>
-                <li class="nav-item">
-                  <%= button_to "ログアウト", destroy_admin_session_path %>
+                <li class="nav-item mr-3">
+                  <%= link_to "ログアウト", destroy_admin_session_path, class: 'btn btn-light' %>
                 </li>
               <% else %>
-                <li class="nav-item">
-                  <%= button_to "About", about_path %>
+                <li class="nav-item mr-3">
+                  <%= link_to "About", about_path, class: 'btn btn-light' %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to "商品一覧", items_path, class: 'btn btn-light' %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to "新規登録", new_customer_registration_path, class: 'btn btn-light' %>
                 </li>
                 <li class="nav-item">
-                  <%= button_to "商品一覧", items_path %>
-                </li>
-                <li class="nav-item">
-                  <%= button_to "新規登録", new_customer_registration_path %>
-                </li>
-                <li class="nav-item">
-                  <%= button_to "ログイン", new_customer_session_path %>
+                  <%= link_to "ログイン", new_customer_session_path, class: 'btn btn-light' %>
                 </li>
               <% end %>
             </ul>
