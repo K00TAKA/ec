@@ -6,12 +6,12 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   # def new
-  #   super
+  #   # @customer = Customer.new
   # end
 
-  # POST /resource
+  # # POST /resource
   # def create
-  #   super
+  #   # @customer = Customer.new(create_users_params)
   # end
 
   # GET /resource/edit
@@ -38,7 +38,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params

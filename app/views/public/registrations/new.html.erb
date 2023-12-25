@@ -1,18 +1,18 @@
 <h2>新規会員登録</h2>
 
-<%= form_with model: @customers, url:customer_session_path, id: 'new_customer', class: 'new_customer', local: true do |f| %>
+<%= form_with model: @customer, url:customer_session_path do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label "名前" %>
-    <%= f.text_field :last_name %>
-    <%= f.text_field :first_name %>
+    (姓)<%= f.text_field :last_name %>
+    (名)<%= f.text_field :first_name %>
   </div>
 
   <div class="field">
     <%= f.label "フリガナ" %>
-    <%= f.text_field :last_name_kana %>
-    <%= f.text_field :first_name_kana %>
+    (セイ)<%= f.text_field :last_name_kana %>
+    (メイ)<%= f.text_field :first_name_kana %>
   </div>
   
   <div class="field">
@@ -46,12 +46,10 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "新規登録" %>
+    <%= f.submit "新規登録", class: 'btn btn-success' %>
   </div>
 <% end %>
 
 <h2>既に登録済みの方</h2>
-<p>
-  <a href="sign_in">こちら</a>  からログインしてください。
-</p>
-
+<%= render "public/shared/links" %>
+<%= render "public/shared/error_messages", resource: resource %>
