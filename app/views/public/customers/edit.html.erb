@@ -56,7 +56,6 @@
   </div>
   <div class="row pb-3">
     <%= f.submit '編集内容を保存', class: 'btn btn-success' %>
-    <a class="btn btn-denger" href="customer_path" role="button">退会する</a>
-    <%= link_to "退会する", customers_withdraw_path,
+    <%= link_to "退会する", customers_withdraw_path, class: 'btn btn-danger' %>
   </div>
 </div>
