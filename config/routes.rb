@@ -17,10 +17,13 @@ Rails.application.routes.draw do
   # namespaceを使うとURLにpublicが付くためscopeを使用
   scope module: 'public' do
     resources :customers, :items, :cart_items, :orders, :addresses
+    root to: 'homes#top'
+    get 'about' => 'homes#about'
+    get '/customers/check' => 'customers#check'
+    get '/customers/withdraw' => 'customers#withdraw'
   end
   
-  root to: 'public/homes#top'
-  get "about" => "public/homes#about"
+
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
