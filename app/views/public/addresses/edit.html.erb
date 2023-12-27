@@ -1,19 +1,22 @@
 <div class="container">
   <h1>配送先編集</h1>
-  <div class="row">
-    <%= form_with model: address, url: address_path(customer.id), method: :patch do |f| %>
-    <div class="col">
-      <h3>郵便番号</h3>
-      <h3>住所</h3>
-      <h3>氏名</h3>
-    </div>
-    <div class="col">
-      <%= f.text.field :postal_code %>
-      <%= f.text.field :address %>
-      <%= f.text_field :name %>
-    </div>
-    <div class="col">
-      <%= f.submit "編集内容を保存", class: 'btn btn-success' %>
-    </div>
-  </div>
+  <table>
+    <tbody>
+      <%= form_with model: @address do |f| %>
+      <tr>
+        <th>郵便番号</th>
+        <td><%= f.text_field :postal_code %></td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= f.text_field :address %></td>
+      </tr>
+      <tr>
+        <th>氏名</th>
+        <td><%= f.text_field :name %></td>
+        <td><%= f.submit "編集内容を保存", class: 'btn btn-success' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

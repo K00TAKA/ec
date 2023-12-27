@@ -1,35 +1,52 @@
 <div class="container">
   <h1>配送先登録/一覧</h1>
-  <%= form_with model: @address do |f| %>
-  <div class="row">
-    <label for="postal_code">郵便番号(ハイフンなし)</label>
-    <%= f.text_field :postal_code %>
-  </div>
-  <div class="row">
-    <label for="address">住所</label>
-    <%= f.text_field :address %>
-  </div>
-  <div class="row">
-    <label for="name">氏名</label>
-    <%= f.text_field :name %>
-    <%= f.submit "新規登録", class:"btn btn-sm btn-secondary" %>
-  </div>
+  <table>
+    <theader>
+      <%= form_with model: Address do |f| %>
+      <tr>
+        <th>郵便番号(ハイフンなし)</th>
+        <td><%= f.text_field :postal_code %></td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= f.text_field :address %></td>
+      </tr>
+      <tr>
+        <th>氏名</th>
+        <td><%= f.text_field :name %></td>
+        <td><%= f.submit "新規登録", class:"btn btn-secondary" %></td>
+      </tr>  
+      <% end %>
+    </theader>
   
-  <div class="row">
-    <table>
+    <tbody>
       <tr>
         <th>郵便番号</th>
         <th>住所</th>
         <th>氏名</th>
         <th></th>
       </tr>
-      <%= @customer.addresses.each do |address| %>
-      <td><%= customer.address.postal_code %></td>
-      <td><%= customer.address.address %></td>
-      <td><%= customer.address.name %></td>
-      <td><%= button_to "編集する", edit_public_address_path(customer.id), class: 'btn btn-success' %></td>
-      <td><%= button_to "削除する", public_address_path(customer.id), method: :delete, class: 'btn btn-danger'%></td>
-      <% end %>
-    </table>
-  </div>
+
+      <tr>
+        <td><%= @customer.postal_code %></td>
+        <td><%= @customer.address %></td>
+        <td><%= @customer.full_name %></td>
+        <td>
+          <%= link_to "編集する", edit_address_path(@customer), class: 'btn btn-success' %>
+          <%= link_to "削除する", address_path(@customer), method: :delete, class: 'btn btn-danger'%>
+        </td>
+      </tr>
+      <tr>
+        <%= @addresses.each do |address| %>
+        <td><%= @address.postal_code %></td>
+        <td><%= @address.address %></td>
+        <td><%= @address.name %></td>
+        <td>
+          <%= link_to "編集する", edit_address_path(@customer.id), class: 'btn btn-success' %>
+          <%= link_to "削除する", address_path(@customer.id), method: :delete, class: 'btn btn-danger'%>
+        </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
 </div>
