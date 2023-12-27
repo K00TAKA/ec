@@ -23,7 +23,7 @@
               <% if customer_signed_in? %>
               <!--link_toにすることでmethodがgetになる（button_toだとpostになる）-->
                 <li class="nav-item mr-3">
-                  <%= link_to 'マイページ', customers_path, class: 'btn btn-light' %>
+                  <%= link_to 'マイページ', customer_path, class: 'btn btn-light' %>
                 </li>
                 <li class="nav-item mr-3">
                   <%= link_to "商品一覧", items_path, class: 'btn btn-light' %>

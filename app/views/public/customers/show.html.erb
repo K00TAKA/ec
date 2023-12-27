@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <h3>登録情報</h3>
-    <a class="btn btn-primary" href="edit" role="button">編集する</a>
+    <%= link_to "編集する", edit_customer_registration_path, class: 'btn btn-success' %>
   </div>
 
   <table class="table">
@@ -41,10 +41,10 @@
   
   <div class="row">
     <h3>配送先</h3>
-    <a class="btn btn-primary" href="addresses" role="button">一覧を見る</a>
+    <%= link_to "一覧を見る", adresses_path, class: 'btn btn-primary' %>
   </div>
   <div class="row">
     <h3>注文履歴</h3>
-    <a class="btn btn-primary" href="orders" role="button">一覧を見る</a>
+    <%= link_to "一覧を見る", orders_path, class: 'btn btn-primary' %>
   </div>
 </div>

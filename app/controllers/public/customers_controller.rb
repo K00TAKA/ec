@@ -1,9 +1,10 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
   
-  def index
+  # def 
     
-  end
+  # end
+  
   
   def withdraw
     @customer = Customer.find(current_customer.id)
