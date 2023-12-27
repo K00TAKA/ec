@@ -15,7 +15,7 @@
     <tbody>
       <tr>
         <td><%= customer.id %></td>
-        <td><%= link_to customer.full_name, admin_customer_path(customer.id) %></td>
+        <td><%= link_to customer.full_name, edit_admin_customer_path(customer.id) %></td>
         <td><%= customer.email %></td>
         <td><!--<= status %>--></td>
       </tr>
