@@ -4,6 +4,23 @@ class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  def update
+    @customer = current_customer
+    if current_customer.update(customer_params)
+    flash[:notice] = "You have updated customer successfully."
+    redirect_to customers_path(@customer)
+    else
+    render :edit
+    end
+  end
+  
+
+  private
+  
+  def customer_params
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number)
+  end
+
   # GET /resource/sign_up
   # def new
   #   # @customer = Customer.new

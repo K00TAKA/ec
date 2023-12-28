@@ -16,11 +16,11 @@ Rails.application.routes.draw do
   
   # namespaceを使うとURLにpublicが付くためscopeを使用
   scope module: 'public' do
+    get '/customers/check' => 'customers#check'
+    patch '/customers/withdraw' => 'customers#withdraw'
     resources :customers, :items, :cart_items, :orders, :addresses
     root to: 'homes#top'
     get 'about' => 'homes#about'
-    get '/customers/check' => 'customers#check'
-    get '/customers/withdraw' => 'customers#withdraw'
   end
   
 

@@ -69,7 +69,11 @@
         <h5>会員ステータス</h5>
       </div>
     <div class="col">
-      <!--< ステータス　有効　退会 >-->
+      <%= f.radio_button :is_deleted, :false %>
+      <%= f.label :is_deleted, "有効", value: :false, class: 'active' %>
+
+      <%= f.radio_button :is_deleted, :true %>
+      <%= f.label :is_deleted, "退会", value: :true, class: 'inactive' %>
     </div>
   </div>
   <div class="row pb-3">

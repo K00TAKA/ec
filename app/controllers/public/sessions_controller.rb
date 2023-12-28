@@ -18,8 +18,6 @@ class Public::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
-
-
   
   private
   
@@ -37,6 +35,20 @@ class Public::SessionsController < Devise::SessionsController
     # 【処理内容4】 アクティブでない会員に対する処理
     customer.update(is_deleted: true)
     # 今回、会員情報を削除せず、is_deletedを使ってステータス管理する（trueの時退会、falseの時未退会）
+  end
+  
+  protected
+  # 会員の論理削除のための記述。退会後は、同じアカウントでは利用できない。
+  def reject_customer
+    @customer = Customer.find_by(full_name: params[:customer][:full_name])
+    if @customer 
+      if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == false)
+        flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
+        redirect_to new_customer_registration
+      else
+        flash[:notice] = "項目を入力してください"
+      end
+    end
   end
 
 end
