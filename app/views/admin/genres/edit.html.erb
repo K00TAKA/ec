@@ -5,8 +5,8 @@
       <p>ジャンル名</p>
     </div>
     <div class="col">
-      <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
-        <%= f.text.field :name %>
+      <%= form_with model: [:admin, @genre], url: admin_genre_path(@genre.id), method: :patch do |f| %>
+        <%= f.text_field :name %>
         <%= f.submit "変更を保存", class: 'btn btn-success' %>
       <% end %>
     </div>
