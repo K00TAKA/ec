@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   }
   
   # 管理者用　URL /admin/sign_in ...
-  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
   
@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   scope module: 'public' do
     get '/customers/check' => 'customers#check'
     patch '/customers/withdraw' => 'customers#withdraw'
-    resources :customers, :items, :cart_items, :orders, :addresses
+    resources :customers, :cart_items, :orders, :addresses
+    resources :items, only: [:index, :show]
     root to: 'homes#top'
     get 'about' => 'homes#about'
   end

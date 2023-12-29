@@ -3,7 +3,7 @@
     <h1>商品編集</h1>
   </div>
   
-  <%= form_with model: item, url: edit_admin_item_path(item.id), method: :patch do |f| %>
+  <%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
   <div class="row">
     <label for="item_image">商品画像</label>
     <%= f.file_field :item_image, accept: "image/*" %>
@@ -18,15 +18,19 @@
   </div>
     <div class="row">
     <label for="genre">ジャンル</label>
-    <!--登録済みジャンルをプルダウン選択できるようにする-->
+    <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "選択して下さい" %>
   </div>
   <div class="row">
     <label for="item_price">税抜価格</label>
-    <%= f.text_file :price %>
+    <%= f.number_field :price %>
   </div>
   <div class="row">
-    <label for="item_introduction">販売ステータス</label>
-    <!--販売ステータス登録できるようにする-->
+    <label for="item_status">販売ステータス</label>
+    <%= f.radio_button :is_active, :true %>
+    <%= f.label :is_active, "販売中", value: :true, class: 'active' %>
+
+    <%= f.radio_button :is_active, :false %>
+    <%= f.label :is_active, "販売停止中", value: :false, class: 'inactive' %>
   </div>
   <div class="row">
     <%= f.submit "変更を保存", class:"btn btn-sm btn-secondary"%>

@@ -1,7 +1,10 @@
 <div class="container">
-  <h1>商品一覧</h1>
-  <!--〇の中に＋が入ったボタン（商品登録画面に遷移する）-->
-  <a href="/admin/items/new">＋</a>
+  <div class="row">
+    <h1>商品一覧</h1>
+    <!--〇の中に＋が入ったボタン（商品登録画面に遷移する）-->
+    <a href="/admin/items/new">＋</a>
+  </div>
+  
   
   <table>
     <thead>
@@ -19,8 +22,8 @@
       <td><%= item.id %></td>
       <td><%= item.name %></td>
       <td><%= item.price %></td>
-      <td><%= item.genre_name %></td>
-      <td><%= item.is_active %></td>
+      <td><%= item.genre.name %></td>
+      <td><%= item.is_active ? '販売中' : '販売停止中' %></td>
     </tbody>
     <% end %>
   </table>

@@ -5,9 +5,6 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
   end
   
-  def check
-  end
-
   def withdraw
     @customer = Customer.find(current_customer.id)
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる

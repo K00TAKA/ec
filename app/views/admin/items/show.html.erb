@@ -1,31 +1,41 @@
-<h1>商品詳細</h1>
+<div class="container">
+  <h1>商品詳細</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>商品名</th>
-      <td><%= item.name %></td>
-    </tr>
-    <tr>
-      <th>商品説明</th>
-      <td><%= item.introduce %></td>
-    </tr>
-    <tr>
-      <th>ジャンル</th>
-      <td><%= item.genre_name %></td>
-    </tr>
-      <th>税抜価格(税込価格)</th>
-      <td>
-        <%= item.price %>
-        <!--<税込価格表示できるようにする>-->
-      </td>
-    </tr>
-    <tr>
-      <th>販売ステータス</th>
-      <td><%= item.is_active %></td>
-    </tr>
-    <tr>
-      <%= button_to "編集する", edit_admin_item_path(customer.id) %>
-    </tr>
-  </thead>
-</table>
+  <div class="row">
+    <div class="col">
+      <%= image_tag url_for(@item.image), size: '300x300' %>
+    </div>
+    
+    <div class="col">
+      <table>
+        <tr>
+          <th>商品名</th>
+          <td><%= @item.name %></td>
+        </tr>
+        <tr>
+          <th>商品説明</th>
+          <td><%= @item.introduction %></td>
+        </tr>
+        <tr>
+          <th>ジャンル</th>
+          <td><%= @item.genre.name %></td>
+        </tr>
+          <th>税抜価格(税込価格)</th>
+          <td>
+            <% amount = @item.price %>
+            <%= number_with_delimiter(amount) %>
+            <% amount = @item.price_with_tax %>
+            (<%= number_with_delimiter(amount) %>)円
+          </td>
+        </tr>
+        <tr>
+          <th>販売ステータス</th>
+          <td><%= @item.is_active ? '販売中' : '販売停止中' %></td>
+        </tr>
+        <tr>
+          <td><%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success" %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
