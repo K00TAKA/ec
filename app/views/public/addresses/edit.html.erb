@@ -2,17 +2,17 @@
   <h1>配送先編集</h1>
   <table>
     <tbody>
-      <%= form_with model: @address do |f| %>
+      <%= form_with model: @address, url: edit_address_path(@address.id), method: :patch do |f| %>
       <tr>
-        <th>郵便番号</th>
+        <th><label for="postal_code">郵便番号</label></th>
         <td><%= f.text_field :postal_code %></td>
       </tr>
       <tr>
-        <th>住所</th>
+        <th><label for="address">住所</label></th>
         <td><%= f.text_field :address %></td>
       </tr>
       <tr>
-        <th>氏名</th>
+        <th><label for="name">氏名</label></th>
         <td><%= f.text_field :name %></td>
         <td><%= f.submit "編集内容を保存", class: 'btn btn-success' %></td>
       </tr>

@@ -2,7 +2,7 @@
   <h1>配送先登録/一覧</h1>
   <table>
     <theader>
-      <%= form_with model: Address do |f| %>
+      <%= form_with model: @address do |f| %>
       <tr>
         <th>郵便番号(ハイフンなし)</th>
         <td><%= f.text_field :postal_code %></td>
@@ -18,7 +18,9 @@
       </tr>  
       <% end %>
     </theader>
+  </table>
   
+  <table class="table">
     <tbody>
       <tr>
         <th>郵便番号</th>
