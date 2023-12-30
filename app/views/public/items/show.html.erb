@@ -19,17 +19,18 @@
       <div class="item_image">
         <%= image_tag url_for(@item.image), size: "200x150" %>
       </div>
-      
     </div>
     
     <div class="col">
       <!--カートに入れるためのコードはこれでいいのか？-->
-      <!--<= form_with model: orders do |f| %>-->
-      <!--<= item.name %>-->
-      <!--<= item.introduction %>-->
-      <!--< 税込価格表示できるようにする>-->
-      <!--<個数プルダウン選択できようにする>-->
-      <!--<= f.submit "カートに入れる", class: 'btn btn-success' %>-->
+      <%= form_with model: @orders do |f| %>
+      <div><%= @item.name %></div>
+      <div><%= @item.introduction %></div>
+      <div><% amount = @item.price_with_tax %></div>
+      <div>￥<%= number_with_delimiter(amount) %>(税込)</div>
+      <!--<div>個数選択フォーム</div>-->
+      <div><%= f.submit "カートに入れる", class: 'btn btn-success' %></div>
+      <% end %>
     </div>
   </div>
 </div>
