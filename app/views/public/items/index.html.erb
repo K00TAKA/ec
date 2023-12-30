@@ -24,8 +24,8 @@
           <% @items.each do |item| %>
           <tr>
             <td>
-              <%= link_to public_item_path(item.id) do %>
-                <%= image_tag item.get_image(200,100) %>
+              <%= link_to item_path(@item.id) do %>
+                <%= image_tag item.image(100,100) %>
               <% end %>
               <%= item.name %>
               <%= item.price %>
