@@ -11,6 +11,7 @@ class Public::AddressesController < ApplicationController
   end
   
   def create
+    @customer = current_customer
     @address = Address.new(address_params)
     if @address.save
       flash[:notice] = "You have created address successfully."
@@ -44,8 +45,5 @@ class Public::AddressesController < ApplicationController
     params.require(:address).permit(:postal_code, :address, :name)
   end
   
-  # def address_params
-  #   params.require(:addresses).permit(:postal_code, :address, :name)
-  # end
   
 end

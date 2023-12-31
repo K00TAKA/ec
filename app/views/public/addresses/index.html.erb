@@ -1,24 +1,24 @@
 <div class="container">
   <h1>配送先登録/一覧</h1>
-  <table>
-    <theader>
-      <%= form_with model: @address do |f| %>
-      <tr>
-        <th>郵便番号(ハイフンなし)</th>
-        <td><%= f.text_field :postal_code %></td>
-      </tr>
-      <tr>
-        <th>住所</th>
-        <td><%= f.text_field :address %></td>
-      </tr>
-      <tr>
-        <th>氏名</th>
-        <td><%= f.text_field :name %></td>
-        <td><%= f.submit "新規登録", class:"btn btn-secondary" %></td>
-      </tr>  
-      <% end %>
-    </theader>
-  </table>
+  <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
+    <table>
+      <thead>
+        <tr>
+          <th>郵便番号(ハイフンなし)</th>
+          <td><%= f.text_field :postal_code %></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td><%= f.text_field :address %></td>
+        </tr>
+        <tr>
+          <th>氏名</th>
+          <td><%= f.text_field :name %></td>
+          <td><%= f.submit "新規登録", class:"btn btn-secondary" %></td>
+        </tr>  
+      </thead>
+    </table>
+  <% end %>
   
   <table class="table">
     <tbody>
@@ -38,17 +38,18 @@
           <%= link_to "削除する", address_path(@customer), method: :delete, class: 'btn btn-danger'%>
         </td>
       </tr>
-      <tr>
-        <%= @addresses.each do |address| %>
-        <td><%= @address.postal_code %></td>
-        <td><%= @address.address %></td>
-        <td><%= @address.name %></td>
-        <td>
-          <%= link_to "編集する", edit_address_path(@customer.id), class: 'btn btn-success' %>
-          <%= link_to "削除する", address_path(@customer.id), method: :delete, class: 'btn btn-danger'%>
-        </td>
-        <% end %>
-      </tr>
+      
+      <%= @addresses.each do |address| %>
+        <tr>
+          <td><%= address.postal_code %></td>
+          <td><%= address.address %></td>
+          <td><%= address.name %></td>
+          <td>
+            <%= link_to "編集する", edit_address_path(address), class: 'btn btn-success' %>
+            <%= link_to "削除する", address_path(address), method: :delete, class: 'btn btn-danger'%>
+          </td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </div>
