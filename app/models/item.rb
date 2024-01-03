@@ -12,8 +12,8 @@ class Item < ApplicationRecord
     end
   end
   
-  def price_with_tax
-    (price * 1.1).to_i
+  def with_tax_price
+    (price * 1.1).floor
   end
   
 end
