@@ -29,16 +29,16 @@
         <div><%= @item.introduction %></div>
         <div><% amount = @item.price_with_tax %></div>
         <div>￥<%= number_with_delimiter(amount) %>(税込)</div>
-        <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-          <div>
-              <!--#オブジェクト名item_id、第二引数部分にvalueで受け渡す値 @item.idを指定-->
-              <!--#cartitem controllerの cart_items.find_by(item_id:に送ることができる-->
-              <%= f.hidden_field :item_id , :value => @item.id %>
-              <%= f.label :amount, "個数選択" %>
-              <%= f.select :amount, *[1..10] %>
-          </div>
-          <div><%= f.submit "カートに入れる", class: 'btn btn-success' %></div>
-        <% end %>
+        <div>
+          <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+            <!--#オブジェクト名item_id、第二引数部分にvalueで受け渡す値 @item.idを指定-->
+            <!--#cartitem controllerの cart_items.find_by(item_id:に送ることができる-->
+            <%= f.hidden_field :item_id , :value => @item.id %>
+            <%= f.label :amount, "個数選択" %>
+            <%= f.select :amount, *[1..10] %>
+            <%= f.submit "カートに入れる", class: 'btn btn-success' %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
