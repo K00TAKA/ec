@@ -7,7 +7,6 @@ class Admin::OrdersController < ApplicationController
   
   def show
     @cart_items = CartItem.all
-    
   end
   
 end

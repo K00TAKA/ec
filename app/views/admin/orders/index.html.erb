@@ -10,7 +10,7 @@
     </tr>
     <% @cart_items.each do |cart_item| %>
       <tr>
-        <td><%= link_to cart_item.created_at, admin_order_path(cart_item.customer.id) %></td>
+        <td><%= link_to cart_item.created_at,  admin_order_detail_path(order.id) %></td>
         <td><%= cart_item.customer.full_name %></td>
         <td><%= cart_item.amount %></td>
         <td><%= %></td>

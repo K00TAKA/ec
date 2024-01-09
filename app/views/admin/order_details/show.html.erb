@@ -1,0 +1,90 @@
+<div class="container">
+  <h1>注文詳細</h1>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>購入者</th>
+        <td><%= order.customer.full_name %></td>
+      </tr>
+      <tr>
+        <th>注文日</th>
+        <td><%= order.created_at%></td>
+      </tr>
+      <tr>
+        <th>配送先</th>
+        <td><%= %></td>
+      </tr>
+      <tr>
+        <th>支払方法</th>
+        <td></td>
+      </tr>
+      <tr>
+        <th>注文ステータス</th>
+        <td>
+          <%=form_with model:orders, url:admin_order_detail_path(order.id), method: :patch, local:ture do |f|  %>
+            <%= f.select :status %>
+            <%= f.submit "更新", class: "btn btn-success" %>
+          <% end %><%= %>
+        </td>
+      </tr>
+    </thead>
+    
+    <div class="row">
+      <div class="col">
+        <tbody class="table table-border">
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>製作ステータス</th>
+          </tr>
+          
+          <!--#合計金額の初期化-->
+          <% total = 0 %>
+          
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td><%= cart_item.item.name %></td>
+              <td>
+                <% price_with_tax = (cart_item.item.price_with_tax).to_i %>
+                <%= number_with_delimiter(price_with_tax) %>
+              </td> 
+              <td>
+                <%= cart_item.amount %>
+              </td>
+              <td>
+                <% subtotal = (cart_item.item.price_with_tax * cart_item.amount).to_i %>
+                <%= number_with_delimiter(subtotal) %>
+              </td>
+              <td>
+                <%=form_with model:order_details,  %>
+                  <%= f.select :making_status %>
+                  <%= f.submit "更新", class: "btn btn-success" %>
+                <% end %>
+              </td>
+            </tr>
+            <!--#アイテムごとに合計金額totalに反映 計算しておく-->
+            <% total += cart_item.subtotal %>
+          <% end %>
+          
+          <div class="col">
+            <tr>
+              <th>合計金額</th>
+              <td><%= number_with_delimiter(total) %>円</td>
+            </tr>
+            <tr>
+              <th>送料</th>
+              <td>800円</td>
+            </tr>
+            <tr>
+              <th>請求金額合計</th>
+              <td><%= number_with_delimiter(total + 800) %>円</td>
+            </tr>
+          </div>
+        </tbody>
+      </div>
+    </div>
+  </table>
+</div>
