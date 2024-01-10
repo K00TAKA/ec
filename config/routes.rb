@@ -20,8 +20,14 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about'
     get '/customers/check' => 'customers#check'
     patch '/customers/withdraw' => 'customers#withdraw'
-    resources :customers, :cart_items, :orders, :addresses
+    resources :customers, :cart_items, :addresses
     resources :items, only: [:index, :show]
+    resources :orders, only: [:index, :new, :create, :show] do
+      collection do
+        get 'confirm'
+        get 'complete'
+      end
+    end
   end
   
 

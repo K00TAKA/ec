@@ -60,3 +60,5 @@ gem 'devise'
 gem 'bootstrap-sass'
 
 gem 'pry-byebug', group: :development
+
+gem "enum_help"
