@@ -5,53 +5,19 @@ class Public::OrdersController < ApplicationController
     
   end
   
-  def confirm
-    @cart_items = CartItem.where(customer_id: current_customer.id)
-     #送料800円固定
-    @shipping_fee = 800 
-    @selected_payment_method = params[:order][:payment_method]
-  
-    #以下、商品合計額の計算
-    ary = []
-    @cart_items.each do |cart_item|
-      ary << cart_item.item.price*cart_item.amount
-    end
-    @cart_items_price = ary.sum
-        
-    @total_price = @shipping_fee + @cart_items_price
-    @address_type = params[:order][:address_type]
-    case @address_type
-    when "customer_address"
-      @selected_address = current_customer.postal_code + " " + current_customer.address + " " + current_customer.first_name + current_customer.last_name
-    when "registered_address"
-      unless params[:order][:registered_address_id] == ""
-        selected = Address.find(params[:order][:registered_address_id]
-        @selected_address = selected.postal_code + " " + selected.address + " " + selected.name
-      else
-        render :new
-      end
-    when "new_address"
-      unless params[:order][:new_postal_code] == "" && params[:order][:new_address] == "" && params[:order][:new_name] == ""
-        @selected_address = params[:order][:new_postal_code] + " " + params[:order][:new_address] + " " + params[:order][:new_name]
-      else
-        render :new
-      end
-    end     
-  end
-    
   def create
     @order = Order.new
     @order.customer_id = current_customer.id
-    @order.shipping_fee = 800
+    @order.postage = 800
     @cart_items = CartItem.where(customer_id: current_customer.id)
     ary = []
     @cart_items.each do |cart_item|
       ary << cart_item.item.price*cart_item.amount
     end
     @cart_items_price = ary.sum
-    @order.total_payment = @order.shipping_fee + @cart_items_price
+    @order.total_payment = @order.postage + @cart_items_price
     @order.payment_method = params[:order][:payment_method]
-    if @order.pamenty_method == "credit_card"
+    if @order.payment_method == "credit_card"
       @order.status = 0
     else
       @order.status = 1
@@ -65,7 +31,7 @@ class Public::OrdersController < ApplicationController
       @order.name = current_customer.first_name + current_customer.last_name
     when "registered_address"
       Addresse.find(params[:order][:registered_address_id])
-      selected = Addresse.find(params[:order][:registered_address_id])
+      selected = Address.find(params[:order][:registered_address_id])
       @order.postal_code = selected.postal_code
       @order.address = selected.address
       @order.name = selected.name
@@ -91,5 +57,39 @@ class Public::OrdersController < ApplicationController
       render :items
     end
   end
+
+  def confirm
+    @cart_items = CartItem.where(customer_id: current_customer.id)
+     #送料800円固定
+    @postage = 800 
+    @selected_payment_method = params[:order][:payment_method]
   
+    #以下、商品合計額の計算
+    ary = []
+    @cart_items.each do |cart_item|
+      ary << cart_item.item.price*cart_item.amount
+    end
+    @cart_items_price = ary.sum
+        
+    @total_price = @postage + @cart_items_price
+    @address_type = params[:order][:address_type]
+    case @address_type
+    when "customer_address"
+      @selected_address = current_customer.postal_code + current_customer.address + current_customer.first_name + current_customer.last_name
+    when "registered_address"
+      unless params[:order][:registered_address_id] == ""
+        selected = Address.find(params[:order][:registered_address_id])
+        @selected_address = selected.postal_code + selected.address + selected.name
+      else
+        render :new
+      end
+    when "new_address"
+      unless params[:order][:new_postal_code] == "" && params[:order][:new_address] == "" && params[:order][:new_name] == ""
+        @selected_address = params[:order][:new_postal_code] + " " + params[:order][:new_address] + " " + params[:order][:new_name]
+      else
+        render :new
+      end
+    end     
+  end
+
 end

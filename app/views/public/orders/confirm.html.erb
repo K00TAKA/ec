@@ -10,15 +10,21 @@
           <th>数量</th>
           <th>小計</th>
         </tr>
-        <%= @cart_items.each do |cart_item| %>
+        <% @cart_items.each do |cart_item| %>
           <tr>
             <td>
               <%= image_tag cart_item.item.image, size: "100x80" %>
               <strong><%= cart_item.item.name %></strong>
             </td>
-            <td><%= cart_item.item.price %></td>
+            <td>
+              <% price_with_tax = cart_item.item.price_with_tax %>
+              <%= number_with_delimiter(price_with_tax) %>
+            </td>
             <td><%= cart_item.amount %></td>
-            <td><%= cart_item.item.price*cart_item.amount %></td>
+            <td>
+              <% subtotal = cart_item.item.price_with_tax * cart_item.amount %>
+              <%= number_with_delimiter(subtotal) %>
+            </td>
           </tr>
         <% end %>
       </table>
@@ -28,22 +34,28 @@
       <table class="table">
         <tr>
           <th>送料</th>
-          <td><%= @shipping_fee %></td>
+          <td><%= @postage %></td>
         </tr>
         <tr>
           <th>商品合計</th>
-          <td><%= @cart_items_price %></td>
+          <td>
+            <% total = @cart_items_price %>
+            <%= number_with_delimiter(total) %>
+          </td>
         </tr>
         <tr>
           <th>請求金額</th>
-          <td><%= @total_payment %></td>
+          <td>
+            <% total_payment = @postage + @cart_items_price %>
+            <%= number_with_delimiter(total_payment) %>
+          </td>
         </tr>
       </table>
     </div>
   </div>
   
   <h4>支払い方法</h4>
-  <% if @selected_pay_method == "credit_card" %>
+  <% if @selected_payment_method == "credit_card" %>
     クレジットカード
   <% else %>
     銀行振込
@@ -51,7 +63,7 @@
     
   <h4>お届け先</h4>
   <%= @selected_address %>
-  <%= form_with url: orders_path, method: :post do %>
+  <%= form_with model: Order, url: orders_path, method: :post do %>
     <%= hidden_field_tag 'order[pay_method]', @selected_pay_method %>
     <%= hidden_field_tag 'order[address_type]', @address_type %>
     
