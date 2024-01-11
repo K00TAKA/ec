@@ -4,6 +4,6 @@ class Order < ApplicationRecord
   
   enum payment_method: { credit_card: 0, bank: 1 }
   # ↓これはどこに記載するべき？ここに記載しておくとエラー出る
-  # enum status: { waiting: 0, confirmation: 1, making: 2, preparation: 3, send: 4 }
+  enum status: { waiting: 0, confirmation: 1, making: 2, preparation: 3, send: 4 }
   
 end
