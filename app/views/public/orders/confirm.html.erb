@@ -62,19 +62,21 @@
   <% end %>
     
   <h4>お届け先</h4>
-  <%= @selected_address %>
-  <%= form_with model: Order, url: orders_path, method: :post do %>
-    <%= hidden_field_tag 'order[pay_method]', @selected_pay_method %>
+  <%= form_with model: Order, url: orders_path, method: :post do |f| %>
+    <%= hidden_field_tag 'order[payment_method]', @selected_payment_method %>
     <%= hidden_field_tag 'order[address_type]', @address_type %>
     
-    <% if @address_type == "registered_address" %>
+    <% if @address_type == "customer_address" %>
+      <%= hidden_field_tag 'order[customer_address_id]', params[:order][:customer_address_id] %>
+    <% elsif @address_type == "registered_address" %>
       <%= hidden_field_tag 'order[registered_address_id]', params[:order][:registered_address_id] %>
     <% elsif @address_type == "new_address" %>
-      <%= hidden_field_tag 'order[new_post_code]', params[:order][:new_post_code] %>
-      <%= hidden_field_tag 'order[new_address]', params[:order][:new_address] %>
-      <%= hidden_field_tag 'order[new_name]', params[:order][:new_name] %>
+      <%= hidden_field_tag 'order[postal_code]', params[:order][:postal_code] %>
+      <%= hidden_field_tag 'order[address]', params[:order][:address] %>
+      <%= hidden_field_tag 'order[name]', params[:order][:name] %>
     <% end %>
-    <%= submit_tag "注文を確定する", class: "btn btn-success" %>
+    
+    <%= f.submit "注文を確定する", class: "btn btn-success" %>
   <% end %>
 
 </div>
