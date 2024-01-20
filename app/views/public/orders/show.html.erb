@@ -1,10 +1,9 @@
 <div class="container">
+<h3>注文履歴詳細</h3>
   <div class="row">
     <div class="col">
-      <h3>注文履歴詳細</h3>
-  
       <h4>注文情報</h4>
-      <table class="table">
+      <table class="table table-bordered">
         <tr>
           <td>注文日</td>
           <td><%= @order.created_at %></td>
@@ -19,15 +18,17 @@
         </tr>
         <tr>
           <td>ステータス</td>
-          <td><%= @order.status_i18n %></td>
+          <td></td>
         </tr>
       </table>
-  
+    </div>
+    
+    <div class="col">
       <h4>請求情報</h4>
-      <table class="table">
+      <table class="table table-bordered">
         <tr>
           <td>商品合計</td>
-          <td><%= @order.total_payment %></td>
+          <td><%= number_with_delimiter(@order.total_payment) %></td>
         </tr>
         <tr>
           <td>配送料</td>
@@ -35,27 +36,31 @@
         </tr>
         <tr>
           <td>ご請求額</td>
-          <td><%= @order.total_payment + @order.postage %></td>
+          <td>
+            <%= number_with_delimiter(@order.total_payment + @order.postage) %>
+          </td>
         </tr>
-      </table>
-  
-      <h4>注文内容</h4>
-      <table class="table">
-        <tr>
-          <td>商品</td>
-          <td>単価(税込)</td>
-          <td>個数</td>
-          <td>小計</td>
-        </tr>
-        <% @order_details.each do |order_detail| %>
-          <tr>
-            <td><%= order_detail.item.name %></td>
-            <td><%= order_detail.item.price %></td>
-            <td><%= order_detail.amount %></td>
-            <td><%= order_detail.amount * order_detail.item.price %></td>
-          </tr>
-        <% end %>
       </table>
     </div>
+  </div>
+  
+  <div class="row">
+    <h4>注文内容</h4>
+    <table class="table table-bordered">
+      <tr>
+        <td>商品</td>
+        <td>単価(税込)</td>
+        <td>個数</td>
+        <td>小計</td>
+      </tr>
+      <% @order_details.each do |order_detail| %>
+        <tr>
+          <td><%= order_detail.item.name %></td>
+          <td><%= order_detail.item.price %></td>
+          <td><%= order_detail.amount %></td>
+          <td><%= order_detail.amount * order_detail.item.price %></td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>

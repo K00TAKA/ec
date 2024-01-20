@@ -2,7 +2,6 @@ class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
   
   def new
-    
   end
   
   def create
@@ -42,8 +41,8 @@ class Public::OrdersController < ApplicationController
     end
     
     if @order.save
-      making_status_mapping = { 0=>0, 1=>1, 2=>2, 3=>3, 4=>4 }
-      making_status = making_status_mapping[@order.status]
+      # making_status_mapping = { 0=>0, 1=>1, 2=>2, 3=>3, 4=>4 }
+      # making_status = making_status_mapping[@order.status]
       
       @cart_items.each do |cart_item|
         OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price_with_tax: cart_item.item.price, amount: cart_item.amount, making_status: making_status)
@@ -91,8 +90,25 @@ class Public::OrdersController < ApplicationController
   
   def index
     @orders = Order.all
+    # if @order.status == "waiting"
+    #   @order.status = 0
+    # elsif
+    #   @order.status = 1
+    # elsif
+    #   @order.status = 2
+    # elsif
+    #   @order.status = 3
+    # elsif
+    #   @order.status = 4
+    # end
+      
   end
-
+  
+  def show
+    @order = Order.find(params[:id])
+    @order_details = OrderDetail.where(order_id: @order.id)
+  end
+  
 
   private
   

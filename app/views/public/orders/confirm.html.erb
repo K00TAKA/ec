@@ -3,7 +3,7 @@
   
   <div class="row">
     <div class="col">
-      <table class="table">
+      <table class="table table-bordered">
         <tr>
           <th>商品名</th>
           <th>単価（税込）</th>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="col">
-      <table class="table">
+      <table class="table table-bordered">
         <tr>
           <th>送料</th>
           <td><%= @postage %></td>
@@ -39,8 +39,7 @@
         <tr>
           <th>商品合計</th>
           <td>
-            <% total = @cart_items_price %>
-            <%= number_with_delimiter(total) %>
+            <%= number_with_delimiter(@cart_items_price) %>
           </td>
         </tr>
         <tr>
