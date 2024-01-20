@@ -41,30 +41,31 @@ class Public::OrdersController < ApplicationController
     end
     
     if @order.save
-      # making_status_mapping = { 0=>0, 1=>1, 2=>2, 3=>3, 4=>4 }
-      # making_status = making_status_mapping[@order.status]
-      
-      @cart_items.each do |cart_item|
-        OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price_with_tax: cart_item.item.price, amount: cart_item.amount, making_status: making_status)
+      if @order.status == 1
+        @cart_items.each do |cart_item|
+          OrderDetail.creat!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, amount: cart_item.amount, making_status: 0)
+        end
+      else
+        @cart_items.each do |cart_item|
+          OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price_with_tax: cart_item.item.price, amount: cart_item.amount, making_status: 1)
+        end
       end
-      
       @cart_items.destroy_all
       redirect_to complete_orders_path
     else
-      render :new
+      render :items
     end
   end
 
   def confirm
-    @order = Order.new(order_params)
-    # @order.postal_code = current_customer.postal_code
-    # @order.address = current_customer.address
-    # @order.name = current_customer.first_name + current_customer.last_name
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @postage = 800 
     @selected_payment_method = params[:order][:payment_method]
     
     ary = []
+    @cart_items.each do |cart_item|
+      ary << cart_item.item.price*cart_item.amount
+    end
     @cart_items_price = ary.sum
       
     @total_price = @postage + @cart_items_price
@@ -80,8 +81,8 @@ class Public::OrdersController < ApplicationController
         render :new
       end
     when "new_address"
-      unless params[:order][:postal_code] == "" && params[:order][:address] == "" && params[:order][:name] == ""
-        @selected_address = params[:order][:postal_code] + params[:order][:address] + params[:order][:name]
+      unless params[:order][:new_postal_code] == "" && params[:order][:new_address] == "" && params[:order][:new_name] == ""
+        @selected_address = params[:order][:new_postal_code] + params[:order][:new_address] + params[:order][:new_name]
       else
         render :new
       end
@@ -89,19 +90,7 @@ class Public::OrdersController < ApplicationController
   end
   
   def index
-    @orders = Order.all
-    # if @order.status == "waiting"
-    #   @order.status = 0
-    # elsif
-    #   @order.status = 1
-    # elsif
-    #   @order.status = 2
-    # elsif
-    #   @order.status = 3
-    # elsif
-    #   @order.status = 4
-    # end
-      
+     @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
   end
   
   def show

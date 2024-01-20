@@ -61,7 +61,8 @@
   <% end %>
     
   <h4>お届け先</h4>
-  <%= form_with model: Order, url: orders_path, method: :post do |f| %>
+  <%= @selected_address %>
+  <%= form_with url: orders_path, method: :post do %>
     <%= hidden_field_tag 'order[payment_method]', @selected_payment_method %>
     <%= hidden_field_tag 'order[address_type]', @address_type %>
     
@@ -70,12 +71,12 @@
     <% elsif @address_type == "registered_address" %>
       <%= hidden_field_tag 'order[registered_address_id]', params[:order][:registered_address_id] %>
     <% elsif @address_type == "new_address" %>
-      <%= hidden_field_tag 'order[postal_code]', params[:order][:postal_code] %>
-      <%= hidden_field_tag 'order[address]', params[:order][:address] %>
-      <%= hidden_field_tag 'order[name]', params[:order][:name] %>
+      <%= hidden_field_tag 'order[new_postal_code]', params[:order][:new_postal_code] %>
+      <%= hidden_field_tag 'order[new_address]', params[:order][:new_address] %>
+      <%= hidden_field_tag 'order[new_name]', params[:order][:new_name] %>
     <% end %>
     
-    <%= f.submit "注文を確定する", class: "btn btn-success" %>
+  <%= submit_tag "注文を確定する", class: "btn btn-success" %>
   <% end %>
 
 </div>
