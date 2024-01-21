@@ -1,19 +1,23 @@
 <div class="container">
   <h1>注文履歴一覧</h1>
   
-  <table class="table">
+  <table class="table table-bordered">
     <tr>
       <th>購入日時</th>
       <th>購入者</th>
       <th>注文個数</th>
       <th>注文ステータス</th>
     </tr>
-    <% @cart_items.each do |cart_item| %>
+    <% @orders.each do |order| %>
       <tr>
-        <td><%= link_to cart_item.created_at,  admin_order_detail_path(order.id) %></td>
-        <td><%= cart_item.customer.full_name %></td>
-        <td><%= cart_item.amount %></td>
-        <td><%= %></td>
+        <td>
+          <%= link_to admin_order_path(order) do %>
+            <%= order.created_at.strftime('%Y/%m/%d') %>
+          <% end %>
+        </td>
+        <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
+        <td><%= order.order_details.sum(:amount) %></td>
+        <td><%= order.status %></td>
       </tr>
     <% end %>
   </table>
