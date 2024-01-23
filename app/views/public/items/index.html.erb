@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col-lg-4">
       <table>
         <tr>
           <th>ジャンル検索</th>
@@ -15,27 +15,20 @@
       </table>
     </div>
     
-    <div class="col">
-      <!--ジャンル検索の場合、商品一覧の部分は「[ジャンル名]一覧」に変更する-->
-      <!--（全〇件）表示件数を出せるようにする-->
-      <h1>商品一覧</h1> 
-      <div class="items">
-        <table>
-          <% @items.each do |item| %>
-          <tr>
-            <td>
-              <%= link_to item_path(item.id) do %>
-                <%= image_tag item.image, size: "100x100" %>
-              <% end %>
-              <%= item.name %>
-              <%= item.price %>
-            </td>
-          </tr>
+    <div class="col-lg-8">
+      <h2>商品一覧</h2>
+      <strong>全<%= @items.count %>件</strong>
+      <div class="row">
+        <% @items.each do |item| %>
+        <div class="col">
+          <%= link_to item_path(item.id) do %>
+            <%= image_tag item.image, size: "120x100" %><br>
           <% end %>
-        </table>
+          <p><%= item.name %></p>
+          <p>￥<%= number_with_delimiter(item.price_with_tax) %></p>
+        </div>
+        <% end %>
       </div>
-      
-      <!--ページネーション入れる-->
     </div>
   </div>
 </div>

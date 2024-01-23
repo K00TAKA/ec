@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   }
   
   # 管理者用　URL /admin/sign_in ...
-  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+  devise_for :admins, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
   
@@ -15,11 +15,11 @@ Rails.application.routes.draw do
   end
   
   # namespaceを使うとURLにpublicが付くためscopeを使用
-  scope module: 'public' do
+  scope module: :public do
     root to: 'homes#top'
-    get '/about' => 'homes#about'
-    get '/customers/check' => 'customers#check'
-    patch '/customers/withdraw' => 'customers#withdraw'
+    get 'about' => 'homes#about'
+    get 'customers/check' => 'customers#check'
+    patch 'customers/withdraw' => 'customers#withdraw'
     resources :customers, :cart_items, :addresses
     resources :items, only: [:index, :show]
     resources :orders, only: [:index, :new, :create, :show] do

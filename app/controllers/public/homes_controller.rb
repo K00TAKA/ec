@@ -1,8 +1,8 @@
 class Public::HomesController < ApplicationController
-  before_action :authenticate_customer!
   
   def top
     @genres = Genre.all
+    @random = Item.order("RANDOM()").limit(4)
   end
   
   def about
