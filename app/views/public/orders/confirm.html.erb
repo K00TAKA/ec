@@ -1,15 +1,15 @@
-<div class="container">
-  <h1>注文情報確認</h1>
+<div class="container py-3">
+  <h2>注文情報確認</h2>
   
   <div class="row">
-    <div class="col">
+    <div class="col-sm-8">
       <table class="table table-bordered">
-        <tr>
+        <tr><thead class="thead-dark" >
           <th>商品名</th>
-          <th>単価（税込）</th>
+          <th>単価(税込)</th>
           <th>数量</th>
           <th>小計</th>
-        </tr>
+        </thead></tr>
         <% @cart_items.each do |cart_item| %>
           <tr>
             <td>
@@ -30,53 +30,62 @@
       </table>
     </div>
 
-    <div class="col">
+    <div class="col-sm-3">
       <table class="table table-bordered">
-        <tr>
+        <tr><thead class="thead-dark">
           <th>送料</th>
           <td><%= @postage %></td>
-        </tr>
-        <tr>
+        </thead></tr>
+        <tr><thead class="thead-dark">
           <th>商品合計</th>
           <td>
             <%= number_with_delimiter(@cart_items_price) %>
           </td>
-        </tr>
-        <tr>
+        </thead></tr>
+        <tr><thead class="thead-dark">
           <th>請求金額</th>
           <td>
             <% total_payment = @postage + @cart_items_price %>
             <%= number_with_delimiter(total_payment) %>
           </td>
-        </tr>
+        </thead></tr>
       </table>
     </div>
   </div>
   
-  <h4>支払い方法</h4>
-  <% if @selected_payment_method == "credit_card" %>
-    クレジットカード
-  <% else %>
-    銀行振込
-  <% end %>
-    
-  <h4>お届け先</h4>
-  <%= @selected_address %>
-  <%= form_with url: orders_path, method: :post do %>
-    <%= hidden_field_tag 'order[payment_method]', @selected_payment_method %>
-    <%= hidden_field_tag 'order[address_type]', @address_type %>
-    
-    <% if @address_type == "customer_address" %>
-      <%= hidden_field_tag 'order[customer_address_id]', params[:order][:customer_address_id] %>
-    <% elsif @address_type == "registered_address" %>
-      <%= hidden_field_tag 'order[registered_address_id]', params[:order][:registered_address_id] %>
-    <% elsif @address_type == "new_address" %>
-      <%= hidden_field_tag 'order[new_postal_code]', params[:order][:new_postal_code] %>
-      <%= hidden_field_tag 'order[new_address]', params[:order][:new_address] %>
-      <%= hidden_field_tag 'order[new_name]', params[:order][:new_name] %>
-    <% end %>
-    
-  <%= submit_tag "注文を確定する", class: "btn btn-success" %>
-  <% end %>
-
+  <div class="row">
+    <div class="col-sm-3">
+      <h5>支払い方法</h5>
+    </div>
+    <div class="col">
+      <% if @selected_payment_method == "クレジットカード" %>
+        クレジットカード
+      <% else %>
+        銀行振込
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-3">
+      <h5>お届け先</h5>
+    </div>
+    <div class="col">
+      <%= @selected_address %>
+      <%= form_with url: orders_path, method: :post do %>
+        <%= hidden_field_tag 'order[address_type]', @address_type %>
+        <% if @address_type == "customer_address" %>
+          <%= hidden_field_tag 'order[customer_address_id]', params[:order][:customer_address_id] %>
+        <% elsif @address_type == "registered_address" %>
+          <%= hidden_field_tag 'order[registered_address_id]', params[:order][:registered_address_id] %>
+        <% elsif @address_type == "new_address" %>
+          <%= hidden_field_tag 'order[new_postal_code]', params[:order][:new_postal_code] %>
+          <%= hidden_field_tag 'order[new_address]', params[:order][:new_address] %>
+          <%= hidden_field_tag 'order[new_name]', params[:order][:new_name] %>
+        <% end %>
+      
+      <%= submit_tag "注文を確定する", class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
 </div>

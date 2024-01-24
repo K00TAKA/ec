@@ -1,13 +1,13 @@
-<div class="container">
-  <h1>注文情報入力</h1>
+<div class="container py-3">
+  <h2>注文情報入力</h2>
   <%= form_with model: Order, url: confirm_orders_path do |f| %>
   
   <h3>支払方法</h3>
   <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
-  <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
+  <%= f.label :payment_method, Order.payment_methods_i18n[:クレジットカード] %>
   <br>
   <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
-  <%= f.label :payment_method, Order.payment_methods_i18n[:bank] %>
+  <%= f.label :payment_method, Order.payment_methods_i18n[:銀行振込] %>
   
   <h3>お届け先</h3>
   <%= f.radio_button :address_type, "customer_address" %>
@@ -24,11 +24,11 @@
   <table>
     <tr>
       <th>郵便番号(ハイフンなし)</th>
-      <td><%= f.text_field :postal_code %></td>
+      <td><%= f.text_field :new_postal_code %></td>
     </tr>
     <tr>
       <th>住所</th>
-      <td><%= f.text_field :address %></td>
+      <td><%= f.text_field :new_address %></td>
     </tr>
     <tr>
       <th>宛名</th>

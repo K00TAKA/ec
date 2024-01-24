@@ -16,7 +16,7 @@ class Public::OrdersController < ApplicationController
     @cart_items_price = ary.sum
     @order.total_payment = @order.postage + @cart_items_price
     @order.payment_method = params[:order][:payment_method]
-    if @order.payment_method == "credit_card"
+    if @order.payment_method == "クレジットカード"
       @order.status = 0
     else
       @order.status = 1
