@@ -3,14 +3,14 @@
     <div class="col-md-12">
       <h3>注文履歴一覧</h3>
       <table class="table table-bordered">
-        <tr>
+        <tr><thead class="thead-dark">
           <th><b>注文日</b></th>
           <th><b>配送先</b></th>
           <th><b>注文商品</b></th>
           <th><b>支払い金額</b></th>
           <th><b>ステータス</b></th>
           <th><b>注文詳細</b></th>
-        </tr>
+        </thead></tr>
         <% @orders.each do |order| %>
           <tr>
             <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
@@ -22,8 +22,8 @@
                 <% end %>
               </ul>
             </td>
-            <td><%= order.total_payment %></td>
-            <td></td>
+            <td><%= number_with_delimiter(order.total_payment) %></td>
+            <td><%= order.status %></td>
             <td><%= link_to "表示する", order_path(order.id), class: "btn btn-info" %></td>
           </tr>
         <% end %>

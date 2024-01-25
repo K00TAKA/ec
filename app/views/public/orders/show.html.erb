@@ -4,42 +4,46 @@
     <div class="col">
       <h4>注文情報</h4>
       <table class="table table-bordered">
-        <tr>
-          <th><b>注文日</b></th>
-          <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
-        </tr>
-        <tr>
-          <th><b>配送先</b></th>
-          <td>〒<%= @order.postal_code + @order.address + @order.name %></td>
-        </tr>
-        <tr>
-          <th><b>支払い方法</b></th>
-          <td><%= @order.payment_method_i18n %></td>
-        </tr>
-        <tr>
-          <th><b>ステータス</b></th>
-          <td></td>
-        </tr>
+        <thead class="thead-dark">
+          <tr>
+            <th><b>注文日</b></th>
+            <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+          <tr>
+            <th><b>配送先</b></th>
+            <td>〒<%= @order.postal_code + @order.address + @order.name %></td>
+          </tr>
+          <tr>
+            <th><b>支払い方法</b></th>
+            <td><%= @order.payment_method_i18n %></td>
+          </tr>
+          <tr>
+            <th><b>ステータス</b></th>
+            <td><%= @order.status %></td>
+          </tr>
+        </thead>
       </table>
     </div>
-    
+      
     <div class="col">
       <h4>請求情報</h4>
       <table class="table table-bordered">
-        <tr>
-          <th><b>商品合計</b></th>
-          <td><%= number_with_delimiter(@order.total_payment) %></td>
-        </tr>
-        <tr>
-          <th><b>配送料</b></th>
-          <td><%= @order.postage %></td>
-        </tr>
-        <tr>
-          <th><b>ご請求額</b></th>
-          <td>
-            <%= number_with_delimiter(@order.total_payment + @order.postage) %>
-          </td>
-        </tr>
+        <thead class="thead-dark">
+          <tr>
+            <th><b>商品合計</b></th>
+            <td><%= number_with_delimiter(@order.total_payment) %></td>
+          </tr>
+          <tr>
+            <th><b>配送料</b></th>
+            <td><%= @order.postage %></td>
+          </tr>
+          <tr>
+            <th><b>ご請求額</b></th>
+            <td>
+              <%= number_with_delimiter(@order.total_payment + @order.postage) %>
+            </td>
+          </tr>
+        </thead>
       </table>
     </div>
   </div>
@@ -47,20 +51,22 @@
   <div class="row">
     <h4>注文内容</h4>
     <table class="table table-bordered">
-      <tr>
-        <th><b>商品</b></th>
-        <th><b>単価(税込)</b></th>
-        <th><b>個数</b></th>
-        <th><b>小計</b></th>
-      </tr>
-      <% @order_details.each do |order_detail| %>
-        <tr>
-          <td><%= order_detail.item.name %></td>
-          <td><%= order_detail.item.price %></td>
-          <td><%= order_detail.amount %></td>
-          <td><%= order_detail.amount * order_detail.item.price %></td>
+      <thead class="thead-dark">
+        <tr >
+          <th><b>商品</b></th>
+          <th><b>単価(税込)</b></th>
+          <th><b>個数</b></th>
+          <th><b>小計</b></th>
         </tr>
-      <% end %>
+        <% @order_details.each do |order_detail| %>
+          <tr>
+            <td><%= order_detail.item.name %></td>
+            <td><%= number_with_delimiter(order_detail.item.price) %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%= number_with_delimiter(order_detail.amount * order_detail.item.price) %></td>
+          </tr>
+        <% end %>
+      </thead>
     </table>
   </div>
 </div>
