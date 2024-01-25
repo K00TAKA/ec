@@ -2,6 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <% if admin_signed_in? %>
+      <!--ここではLOGOマークを文字で代用することにした-->
         <%= link_to "ながのCAKE", admin_items_path %>
       <% else %>
         <%= link_to "ながのCAKE", root_path %>
@@ -12,6 +13,9 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto" >
           <% if customer_signed_in? %>
+            <li class="customer-name text-light">
+            ようこそ、<%= current_customer.first_name %>さん！
+           </li>
           <!--link_toにすることでmethodがgetになる（button_toだとpostになる）-->
             <li class="nav-item mr-3">
               <%= link_to 'マイページ', customers_path(current_customer), class: 'btn btn-light' %>

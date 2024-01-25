@@ -18,7 +18,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   private
   
   def customer_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number)
+    params.require(:customer).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :postal_code, :address, :telephone_number)
   end
 
   # GET /resource/sign_up
