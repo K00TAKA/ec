@@ -1,39 +1,40 @@
-<h2>会員情報編集</h2>
-
-<div class="container">
+<div class="container py-3">
+  <h2>会員情報編集</h2>
   <%= form_with model: @customer, url: customer_path(@customer), method: :patch do |f| %>
     <!--<= render "publics/shared/error_messages", resource: @customer %>-->
 
-    <div class="field">
-    <%= f.label "氏名" %>
-    <%= f.text_field :first_name %>
-    <%= f.text_field :last_name %>
+    <div class="row p-1">
+      <div class="col-md-2"><%= f.label "氏名" %></div>
+      <div class="col-xs-4"><%= f.text_field :first_name %></div>
+      <div class="col-xs-4"><%= f.text_field :last_name %></div>
   </div>
   
-  <div class="field">
-    <%= f.label "フリガナ" %>
-    <%= f.text_field :first_name_kana %>
-    <%= f.text_field :last_name_kana %>
+  <div class="row p-1">
+    <div class="col-md-2"><%= f.label "フリガナ" %></div>
+    <div class="col-xs-4"><%= f.text_field :first_name_kana %></div>
+    <div class="col-xs-4"><%= f.text_field :last_name_kana %></div>
   </div>
   
-  <div class="field">
-    <%= f.label "郵便番号" %>
-    <%= f.text_field :postal_code %>
+  <div class="row p-1">
+    <div class="col-md-2"><%= f.label "郵便番号" %></div>
+    <div class="col-xs-4"><%= f.text_field :postal_code %></div>
   </div>
   
-  <div class="field">
-    <%= f.label "住所" %>
-    <%= f.text_field :address %>
+  <div class="row p-1">
+    <div class="col-md-2"><%= f.label "住所" %></div>
+    <div class="col-xs-8"><%= f.text_field :address %></div>
   </div>
   
-  <div class="field">
-    <%= f.label "電話番号" %>
-    <%= f.text_field :telephone_number %>
+  <div class="row p-1">
+    <div class="col-md-2"><%= f.label "電話番号" %></div>
+    <div class="col-xs-4"><%= f.text_field :telephone_number %></div>
   </div>
   
   <div class="actions">
-    <%= f.submit '編集内容を保存', class: 'btn btn-success' %>
-    <%= link_to "退会する", customers_check_path, class: 'btn btn-danger' %>
+    <div class="col text-center p-3">
+      <%= f.submit '編集内容を保存', class: 'btn btn-success' %>
+      <%= link_to "退会する", customers_check_path, class: 'btn btn-danger' %>
+    </div>
   </div>
   
   <% end %>
