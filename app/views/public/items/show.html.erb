@@ -25,7 +25,7 @@
       <!--カートに入れるためのコードはこれでいいのか？-->
       <!--#商品販売中の場合-->
       <% if @item.is_active == true %>
-        <div><%= @item.name %></div>
+        <div><b><%= @item.name %></b></div>
         <div><%= @item.introduction %></div>
         <div><% amount = @item.price_with_tax %></div>
         <div>￥<%= number_with_delimiter(amount) %>(税込)</div>

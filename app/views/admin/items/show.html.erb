@@ -1,39 +1,40 @@
-<div class="container">
-  <h1>商品詳細</h1>
+<div class="container py-3">
+  <h3>商品詳細</h3>
 
-  <div class="row">
-    <div class="col">
-      <%= image_tag url_for(@item.image), size: '300x300' %>
+  <div class="row py-5">
+    <div class="col-xs-5">
+      <%= image_tag url_for(@item.image), size: '300x270' %>
     </div>
     
-    <div class="col">
+    <div class="col-lg-6">
       <table>
         <tr>
-          <th>商品名</th>
+          <th class="py-3">商品名</th>
           <td><%= @item.name %></td>
         </tr>
         <tr>
-          <th>商品説明</th>
+          <th class="py-3">商品説明</th>
           <td><%= @item.introduction %></td>
         </tr>
         <tr>
-          <th>ジャンル</th>
+          <th class="py-3">ジャンル</th>
           <td><%= @item.genre.name %></td>
         </tr>
-          <th>税抜価格(税込価格)</th>
+          <th class="py-3">
+            税抜価格<br>
+            (税込価格)
+          </th>
           <td>
-            <% amount = @item.price %>
-            <%= number_with_delimiter(amount) %>
-            <% amount = @item.price_with_tax %>
-            (<%= number_with_delimiter(amount) %>)円
+            <%= number_with_delimiter(@item.price) %>
+            (<%= number_with_delimiter(@item.price_with_tax) %>)円
           </td>
         </tr>
         <tr>
-          <th>販売ステータス</th>
-          <td><%= @item.is_active ? '販売中' : '販売停止中' %></td>
+          <th class="py-3">販売ステータス</th>
+          <td><strong><%= @item.is_active ? '販売中' : '販売停止中' %></strong></td>
         </tr>
         <tr>
-          <td><%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success" %></td>
+          <td class="py-1"><%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success" %></td>
         </tr>
       </table>
     </div>

@@ -1,15 +1,13 @@
-<div class="container">
+<div class="container py-3">
   <h1>会員一覧</h1>
   
-  <table class="table">
-    <thead>
-      <tr>
-        <th>会員ID</th>
-        <th>氏名</th>
-        <th>メールアドレス</th>
-        <th>ステータス</th>
-      </tr>
-    </thead>
+  <table class="table table-bordered">
+    <tr><thead class="thead-dark">
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </thead></tr>
     
     <% @customers.each do |customer| %>
     <tbody>
@@ -17,7 +15,13 @@
         <td><%= customer.id %></td>
         <td><%= link_to customer.full_name, edit_admin_customer_path(customer.id) %></td>
         <td><%= customer.email %></td>
-        <td><!--<= status %>--></td>
+        <td>
+          <% if customer.is_deleted %>
+            退会済み
+          <% else %>
+            有効
+          <% end %>
+        </td>
       </tr>
     </tbody>
     <% end %>

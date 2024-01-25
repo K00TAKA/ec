@@ -24,8 +24,8 @@
           <%= link_to item_path(item.id) do %>
             <%= image_tag item.image, size: "120x100" %><br>
           <% end %>
-          <p><%= item.name %></p>
-          <p>￥<%= number_with_delimiter(item.price_with_tax) %></p>
+          <strong><%= item.name %></strong><br>
+          <strong>￥<%= number_with_delimiter(item.price_with_tax) %></strong>
         </div>
         <% end %>
       </div>
