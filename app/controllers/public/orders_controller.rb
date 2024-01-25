@@ -41,7 +41,7 @@ class Public::OrdersController < ApplicationController
     end
     
     if @order.save
-      if @order.status == 1
+      if @order.status == 0
         @cart_items.each do |cart_item|
           OrderDetail.creat!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, amount: cart_item.amount, making_status: 0)
         end
@@ -51,7 +51,7 @@ class Public::OrdersController < ApplicationController
         end
       end
       @cart_items.destroy_all
-      redirect_to complete_orders_path
+      redirect_to thanks_orders_path
     else
       render :items
     end
