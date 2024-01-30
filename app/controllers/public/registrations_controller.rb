@@ -14,7 +14,8 @@ class Public::RegistrationsController < Devise::RegistrationsController
     end
   end
   
-
+  
+  
   private
   
   def customer_params

@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :items, :genres, :customers, :orders, :order_details
+    resources :orders do
+      member do
+        patch 'update_status', to: 'orders#update_status'
+      end
+    end
   end
   
   # namespaceを使うとURLにpublicが付くためscopeを使用

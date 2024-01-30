@@ -43,7 +43,7 @@ class Public::OrdersController < ApplicationController
     if @order.save
       if @order.status == 0
         @cart_items.each do |cart_item|
-          OrderDetail.creat!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, amount: cart_item.amount, making_status: 0)
+          OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, amount: cart_item.amount, making_status: 0)
         end
       else
         @cart_items.each do |cart_item|

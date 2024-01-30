@@ -6,7 +6,7 @@
         <th>購入者</th>
         <td>
           <%= link_to admin_customer_path(@order) do %>
-            <%= @order.customer.last_name %><%= @order.customer.first_name %>
+            <%= @order.customer.first_name %><%= @order.customer.last_name %>
           <% end %>
         </td>
       </tr>
@@ -25,9 +25,9 @@
       <tr>
         <th>注文ステータス</th>
         <td>
-          <%= form_with model:@order, url: admin_order_path, local: true do |f| %>
-            <%= f.select :status, ["入金待ち", "入金確認","製作中","発送準備中","発送済み"] %>
-            <%= f.submit "更新", class: 'btn btn-primary' %>
+          <%= form_tag update_status_admin_order_path(@order), method: :patch do %>
+            <%= select_tag :new_status, options_for_select(["入金待ち", "入金確認","製作中","発送準備中","発送済み"], @order.status) %>
+            <%= submit_tag "更新", class: 'btn btn-primary' %>
           <% end %>
         </td>
       </tr>
@@ -48,9 +48,15 @@
         <% @order_details.each do |order_detail| %>
           <tr>
             <td><%= order_detail.item.name %></td>
-            <td><%= number_with_delimiter(order_detail.item.price) %></td>
+            <td>
+              <% price_with_tax = (order_detail.item.price*1.1).floor %>
+              <%= number_with_delimiter(price_with_tax) %>
+            </td>
             <td><%= order_detail.amount %></td>
-            <td><%= number_with_delimiter(order_detail.amount * order_detail.item.price) %></td>
+            <td>
+              <% subtotal = (order_detail.amount * price_with_tax) %>
+              <%= number_with_delimiter(subtotal) %>
+            </td>
             <td>
               <%= form_with model:order_detail, url: admin_order_detail_path(order_detail), local: true do |f| %>
                 <%= f.select :making_status, ["製作不可", "製作待ち", "製作中", "製作完了"] %>
@@ -66,7 +72,9 @@
       <table>
         <tr>
           <th>商品合計</th>
-          <td><%= number_with_delimiter(@order.total_payment) %>円</td>
+          <td>
+            <% items_total_price = ((@order.total_payment - @order.postage)*1.1).floor %>
+            <%= number_with_delimiter(items_total_price) %>円</td>
         </tr>
         <tr>
           <th>送料</th>
@@ -74,7 +82,7 @@
         </tr>
         <tr>
           <th>請求金額合計</th>
-          <td><%= number_with_delimiter(@order.total_payment + @order.postage) %>円</td>
+          <td><%= number_with_delimiter(items_total_price + @order.postage) %>円</td>
         </tr>
       </table>
     </div>

@@ -14,14 +14,21 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.update(order_params)
     @order_details = @order.order_details
-
-    if @order.status == "入金確認"
-      @order_details.each do |order_detail|
-        order_detail.make_status = "製作待ち"
-        order_detail.save
-      end
+  end
+  
+  def update_status
+    @order = Order.find(params[:id])
+    new_status = params[:new_status]
+    
+    if @order.update(status: new_status)
+      # 更新成功時の処理
+      flash[:success] = "注文ステータスが更新されました。"
+    else
+      # 更新失敗時の処理
+      flash[:error] = "注文ステータスの更新に失敗しました。"
     end
-    redirect_to admin_order_path
+    
+    redirect_to admin_order_path(@order)
   end
   
   private

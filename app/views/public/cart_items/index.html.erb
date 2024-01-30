@@ -21,7 +21,7 @@
     <% total = 0 %>
 
     <!--#カート内に商品があった場合-->
-    <% if current_customer.cart_items.present? %>
+    <% if @cart_items.present? %>
       <% @cart_items.each do |cart_item| %>
         <tr>
           <td>
@@ -39,7 +39,7 @@
             <% end %>
           </td>
           <td>
-            <% subtotal = (cart_item.item.price_with_tax * cart_item.amount).to_i %>
+            <% subtotal = (cart_item.item.price_with_tax * cart_item.amount) %>
             <%= number_with_delimiter(subtotal) %>
           </td>
           <td><%= link_to "削除", cart_item_path(cart_item.id) ,  method: :delete , "data-confirm" => "商品を削除しますか？" , class: "btn btn-danger"%></td>
@@ -66,7 +66,11 @@
   
   <div class="row">
     <div class="col text-center">
-      <%= link_to "情報入力に進む" , new_order_path , class: "btn btn-success" %>
+      <% if current_customer.cart_items.any? %>
+        <%= link_to new_order_path do %>
+          <button class="btn btn-success">情報入力に進む</button>
+        <% end %>
+      <% end %>
     </div>
   </div>
   

@@ -39,13 +39,14 @@
         <tr><thead class="thead-dark">
           <th>商品合計</th>
           <td>
-            <%= number_with_delimiter(@cart_items_price) %>
+            <% subtotal = (@cart_items_price * 1.1).floor %>
+            <%= number_with_delimiter(subtotal) %>
           </td>
         </thead></tr>
         <tr><thead class="thead-dark">
           <th>請求金額</th>
           <td>
-            <% total_payment = @postage + @cart_items_price %>
+            <% total_payment = @postage + (@cart_items_price * 1.1).floor %>
             <%= number_with_delimiter(total_payment) %>
           </td>
         </thead></tr>
@@ -55,7 +56,7 @@
   
   <div class="row">
     <div class="col-sm-3">
-      <h5>支払い方法</h5>
+      <h5>支払方法</h5>
     </div>
     <div class="col">
       <% if @selected_payment_method == "クレジットカード" %>

@@ -13,7 +13,7 @@
       </tr>
       <tr>
         <th>配送先</th>
-        <td><%= %></td>
+        <td></td>
       </tr>
       <tr>
         <th>支払方法</th>
@@ -48,7 +48,7 @@
             <tr>
               <td><%= cart_item.item.name %></td>
               <td>
-                <% price_with_tax = (cart_item.item.price_with_tax).to_i %>
+                <% price_with_tax = (cart_item.item.price_with_tax * 1.1).floor %>
                 <%= number_with_delimiter(price_with_tax) %>
               </td> 
               <td>

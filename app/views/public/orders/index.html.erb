@@ -22,7 +22,9 @@
                 <% end %>
               </ul>
             </td>
-            <td><%= number_with_delimiter(order.total_payment) %></td>
+            <td>
+              <% total = ((order.total_payment - order.postage)*1.1 + order.postage).floor %>
+              <%= number_with_delimiter(total) %></td>
             <td><%= order.status %></td>
             <td><%= link_to "表示する", order_path(order.id), class: "btn btn-info" %></td>
           </tr>

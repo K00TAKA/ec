@@ -5,6 +5,10 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
   end
   
+  def show
+    @customer = current_customer
+  end
+  
   def withdraw
     @customer = Customer.find(current_customer.id)
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる
